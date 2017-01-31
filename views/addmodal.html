@@ -1,0 +1,60 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body ng-controller="userCreateController">
+<div class="modal-header"><h4>New User</h4></div>
+<div class="modal-body">
+    <form name="addForm">
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input name="name" type="text" class="form-control" id="nameInput" ng-model="newUser.name" required>
+            <span ng-show="addForm.name.$touched && addForm.name.$invalid" style="color: red">The name is required!</span>
+
+            <label for="usernameInput">Username</label>
+            <input name="username" type="text" class="form-control" id="usernameInput" ng-model="newUser.username" ng-change="usernameValidation()" required>
+            <span ng-show="addForm.username.$touched && addForm.username.$invalid" style="color: red">The username is required!</span>
+            <span ng-show="!usernameUnique" style="color: red">This name is already used!</span>
+
+            <label for="emailInput">Email</label>
+            <input type="text" class="form-control" id="emailInput" ng-model="newUser.email" ng-change="emailValidation()">
+            <span ng-show="addForm.email.$touched && addForm.email.$invalid" style="color: red">The email is required!</span>
+            <span ng-show="!emailUnique" style="color: red">This email is already used!</span>
+            <span ng-show="!emailReg" style="color: red">This is not email!</span>
+
+            <label for="phoneInput">Phone</label>
+            <input type="text" class="form-control" id="phoneInput" ng-model="newUser.phone" ng-change="phoneValidation()">
+            <span ng-show="!phoneReg" style="color: red">Phone is not valid!</span>
+
+            <label>Address</label>
+                <div class="address">
+                    <div class="street col-xs-4">
+                        <input class="form-control" id="ex1" type="text" ng-model="newUser.address.street" placeholder="Street">
+                    </div>
+                    <div class="col-xs-4">
+                        <input class="form-control" id="ex1" type="text" ng-model="newUser.address.suite" placeholder="Suite">
+                    </div>
+                    <div class="col-xs-4">
+                        <input class="form-control" id="ex1" type="text" ng-model="newUser.address.city" placeholder="City">
+                    </div>
+                    <div class="zipcode col-xs-4">
+                        <input class="form-control" id="ex1" type="text" ng-model="newUser.address.zipcode" placeholder="Zipcode">
+                    </div>
+                </div>
+
+            <label for="websiteInput">Website</label>
+            <input type="text" class="form-control" id="websiteInput" ng-model="newUser.website">
+
+            <label for="nameInput">Company name</label>
+            <input name="company" type="text" class="form-control" id="companynameInput" ng-model="newUser.company.name" required>
+            <span ng-show="addForm.company.$touched && addForm.company.$invalid" style="color: red">The company name is required!</span>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-click="submit()">Submit</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>
+
+</body>
+</html>

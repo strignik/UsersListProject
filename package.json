@@ -1,0 +1,15 @@
+{
+  "name": "userlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "controllers.js",
+  "dependencies": {
+    "angular-route": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikita Strigunkov",
+  "license": "ISC"
+}

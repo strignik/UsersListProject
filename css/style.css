@@ -1,0 +1,29 @@
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.nav{
+    display: flex;
+    flex-direction: row;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+.address{
+    display: flex;
+    flex-direction: row;
+}
+.col-xs-4{
+    padding: 2px;
+}
+.street{
+    padding-left: 0px;
+}
+.zipcode{
+    padding-right: 0px;
+}
+.alert{
+    font-size: large;
+}

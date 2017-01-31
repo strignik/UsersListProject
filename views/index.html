@@ -1,0 +1,105 @@
+<html ng-app="userListApp" xmlns:orderBy="http://www.w3.org/1999/xhtml" xmlns:sortType="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../controllers/controllers.js"></script>
+</head>
+<body class="main" ng-controller="UserListCtrl">
+    <form class="nav navbar-form navbar-left" role="search">
+            <div class="input-group btn-group" style="display: flex; max-width: 30%">
+                <input type="text" class="form-control" aria-label="..." ng-model="searchValue">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{searchType||'Search'}}
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu" >
+                        <li><a href="#" ng-click="searchType='Name'">Name</a></li>
+                        <li><a href="#" ng-click="searchType='Username'">Username</a></li>
+                        <li><a href="#" ng-click="searchType='Email'">Email</a></li>
+                    </ul>
+            </div>
+        <button type="button" class="btn btn-default" ng-click="open()">
+            <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+        </button>
+    </form>
+    <div ng-repeat="alert in alerts" class="alert alert-success">{{alert.message}}</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                        Name
+                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'username'; sortReverse = !sortReverse">
+                        Username
+                        <span ng-show="sortType == 'username' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'username' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+                        Email
+                        <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="sortType = 'address.street'; sortReverse = !sortReverse">
+                        Address
+                        <span ng-show="sortType == 'address.street' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'address.street' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>
+                    <a href="#" ng-click="sortType = 'company.name'; sortReverse = !sortReverse">
+                        Company
+                        <span ng-show="sortType == 'company.name' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'company.name' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:search track by user.id">
+                <th>{{user.id}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.username}}</th>
+                <th>
+                    <p id="{{user.id+'email'}}" >{{user.email}}</p>
+                    <button type="button" class="btn btn-default btn-md" aria-label="Left Align" id="{{user.id}}"ng-click="myFunc()" value="Copy">
+                        <i class="fa fa-clone" aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th>{{"Street: " + user.address.street}}<br>{{"Suite: " + user.address.suite}}<br>{{"City: " + user.address.city}}<br>{{"Zipcode: " + user.address.zipcode}}</th>
+                <th>{{user.phone}}</th>
+                <th>{{user.website}}</th>
+                <th>{{user.company.name}}</th>
+                <th>
+                    <button type="button" class="btn btn-default btn-md" aria-label="Left Align" ng-click="openEdit(user)">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-md" aria-label="Left Align" ng-click="deleteUser(user)" value="Delete">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </th>
+            </tr>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+
+
+</body>
+</html>
